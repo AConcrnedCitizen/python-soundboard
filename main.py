@@ -11,9 +11,6 @@ db = "db.db"
 device = "VoiceMeeter Input (VB-Audio VoiceMeeter VAIO)"
 global song
 
-
-
-
 def get_devices(capture_devices: bool = False) -> tuple([str, ...]):
     init_by_me = not pygame.mixer.get_init()
     if init_by_me:
