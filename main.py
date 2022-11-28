@@ -11,6 +11,17 @@ db = "db.db"
 device = "VoiceMeeter Input (VB-Audio VoiceMeeter VAIO)"
 global song
 
+con = sqlite3.connect(db)
+cur = con.cursor()
+# if the database is empty, create the table
+if cur.execute("SELECT * FROM songs").fetchone() == None:
+    cur.execute("CREATE TABLE IF NOT EXISTS shortcuts (key, sound)")
+    cur.execute("CREATE TABLE IF NOT EXISTS sounds (name, path)")
+    con.commit()
+
+con.close()
+
+
 def get_devices(capture_devices: bool = False) -> tuple([str, ...]):
     init_by_me = not pygame.mixer.get_init()
     if init_by_me:
